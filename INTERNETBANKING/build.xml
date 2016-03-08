@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<project default="main">
+
+    <property name="message" value="Building the .jar file." />
+    <property name="src" location="source" />
+    <property name="output" location="bin" />
+
+    <target name="main" depends="init, compile, compress">
+        <echo>
+            ${message}
+        </echo>
+    </target>
+  
+    <target name="init">
+        <mkdir dir="${output}" />
+    </target>
+  
+    <target name="compile">
+        <javac srcdir="${src}" destdir="${output}" />
+    </target>
+  
+  <target name="compress">
+        <jar destfile="${output}/Project.jar" basedir="${output}" includes="*.class" >
+            <manifest>
+            <attribute name="Author" value="${user.name}"/>
+            <section name="Shared">
+                <attribute name="Title" value="Example"/>
+                <attribute name="Vendor" value="MegaAntCo"/>
+            </section>
+            <section name="Copyright">
+                <attribute name="Copy" value="(C) MegaAntCo 2005"/>
+            </section>
+        </manifest>
+     </jar>
+  </target>
+</project>
+
+
